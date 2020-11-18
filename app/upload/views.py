@@ -18,7 +18,6 @@ class UploadViewSet(ViewSet):
     def create(self, request):
         try:
             file_uploaded = request.FILES.get("file_uploaded")
-
             f_s = FileSystemStorage()
             filename = f_s.save(file_uploaded.name, file_uploaded)
             image_url = f_s.url(filename)

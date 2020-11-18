@@ -142,20 +142,21 @@ USE_L10N = True
 
 USE_TZ = True
 
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_METHODS = list(default_methods)
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://cotizate.com",
     "http://www.cotizate.com",
-    "http://34.71.45.26",
-    "http://35.226.118.27:9000",
+    "http://35.225.59.226:9000",
 ]
 
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:3000",
     "http://cotizate.com",
     "http://www.cotizate.com",
-    "http://34.71.45.26",
-    "http://35.226.118.27:9000",
+    "http://35.225.59.226:9000",
 ]
 
 CSRF_COOKIE_NAME = "csrftoken"
@@ -163,14 +164,18 @@ CSRF_COOKIE_NAME = "csrftoken"
 CSRF_TRUSTED_ORIGINS = (
     "localhost:3000",
     "cotizate.com",
-    "34.71.45.26",
-    "35.226.118.27:9000",
+    "35.225.59.226:9000",
 )
 
 CORS_ALLOW_HEADERS = default_headers + (
     "x-xsrf-token",
     "HTTP_X_XSRF_TOKEN",
     "X-ACCESS_TOKEN",
+    "content-type",
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "origin",
 )
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
