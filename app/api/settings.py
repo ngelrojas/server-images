@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 from corsheaders.defaults import default_methods
 from corsheaders.defaults import default_headers
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,13 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '-mgam+nx7oso7fyl0bg-pac-tb$s5!^u041)46&45)8^5ikn4a'
-SECRET_KEY = os.environ.get("SECRET_KEY")
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS").split(" ")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv())
 
 
 # Application definition
@@ -90,12 +91,12 @@ WSGI_APPLICATION = "api.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
-        "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "password"),
-        "HOST": os.environ.get("SQL_HOST", "localhost"),
-        "PORT": os.environ.get("SQL_PORT", "5432"),
+        "ENGINE": config("SQL_ENGINE", "django.db.backends.sqlite3"),
+        "NAME": config("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
+        "USER": config("SQL_USER", "user"),
+        "PASSWORD": config("SQL_PASSWORD", "password"),
+        "HOST": config("SQL_HOST", "localhost"),
+        "PORT": config("SQL_PORT", "5432"),
     }
 }
 
